@@ -1,3 +1,4 @@
 #!/usr/bin/python3
-def no_c(my_string):
-    return ''.join([char for char in my_string if char not in ['c', 'C']])
+def print_matrix_integer(matrix=[[]]):
+    for row in matrix:
+        print(" ".join("{:d}".format(num) for num in row))
