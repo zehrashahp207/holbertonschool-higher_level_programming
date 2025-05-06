@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def list_division(my_list_1, my_list_2, list_length):
     result = []
     
@@ -25,9 +26,8 @@ def list_division(my_list_1, my_list_2, list_length):
         except ZeroDivisionError:
             print("division by 0")
             result.append(0)
-        
-        finally:
-            if len(result) < list_length:
-                result.append(0)
+
+    while len(result) < list_length:
+        result.append(0)
 
     return result
