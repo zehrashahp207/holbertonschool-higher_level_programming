@@ -1,15 +1,21 @@
 #!/usr/bin/python3
-def append_write(filename="", text=""):
+"""
+This module provides a function that writes a string to a text file (UTF8),
+creating the file if it does not exist, and overwriting its content if it does.
+"""
+
+
+def write_file(filename="", text=""):
     """
-    Appends a string at the end of a text file (UTF8)
-    and returns the number of characters added.
+    Writes a string to a text file (UTF8), overwriting its content,
+    and returns the number of characters written.
 
     Args:
-        filename (str): The name of the file.
-        text (str): The string to append.
+        filename (str): Name of the file to write to.
+        text (str): Text to write.
 
     Returns:
         int: Number of characters written.
     """
-    with open(filename, "a", encoding="utf-8") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         return f.write(text)
