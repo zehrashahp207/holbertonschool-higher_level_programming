@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 """
-This module defines a Student class with a method
-to retrieve a dictionary representation of its attributes,
-optionally filtered by a list.
+This module defines a Student class that can be serialized to a dictionary.
 """
 
 
 class Student:
-    """Defines a student by first name, last name, and age."""
+    """Defines a student with first_name, last_name, and age."""
 
     def __init__(self, first_name, last_name, age):
         """Initializes a new Student instance."""
@@ -17,9 +15,10 @@ class Student:
 
     def to_json(self, attrs=None):
         """
-        Retrieves a dictionary representation of a Student instance.
-        If attrs is a list of strings, only those attributes are returned.
-        Otherwise, all attributes are returned.
+        Returns a dictionary representation of a Student instance.
+
+        If attrs is a list of strings, only attributes with names in that list
+        will be included. Otherwise, all attributes are included.
         """
         if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
             return {
