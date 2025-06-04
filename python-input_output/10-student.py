@@ -27,4 +27,3 @@ class Student:
                 for key in attrs if hasattr(self, key)
             }
         return self.__dict__
-
