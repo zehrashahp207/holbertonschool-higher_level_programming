@@ -20,10 +20,11 @@ class Student:
         If attrs is a list of strings, only attributes with names in that list
         will be included. Otherwise, all attributes are included.
         """
-        if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
-            return {
-                key: getattr(self, key)
-                for key in attrs
-                if hasattr(self, key)
-            }
+        if (isinstance(attrs, list) and
+                all(isinstance(attr, str) for attr in attrs)):
+            result = {}
+            for key in attrs:
+                if hasattr(self, key):
+                    result[key] = getattr(self, key)
+            return result
         return self.__dict__
