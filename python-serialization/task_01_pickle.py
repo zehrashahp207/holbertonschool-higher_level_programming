@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+import pickle
+
 class CustomObject:
     def __init__(self, name, age, is_student):
         self.name = name
@@ -6,14 +7,27 @@ class CustomObject:
         self.is_student = is_student
 
     def display(self):
-        print (f"Name: {self.name}\nAge: {self.age}\nIs Student: {self.is_student}"):
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+        print(f"Is Student: {self.is_student}")
 
     def serialize(self, filename):
-        with open(filename, "ab") as f:
-            pickle.dump(self, f)
+        try:
+            with open(filename, 'wb') as file:
+                pickle.dump(self, file)
+        except Exception as e:
+            print(f"Serialization failed: {e}")
 
     @classmethod
     def deserialize(cls, filename):
-        with open(filename, "rb") as f:
-            data = pickle.load(f)
-            return cls(data)
+        try:
+            with open(filename, 'rb') as file:
+                obj = pickle.load(file)
+                if isinstance(obj, cls):
+                    return obj
+                else:
+                    print("Deserialized object is not of type CustomObject.")
+                    return None
+        except (FileNotFoundError, pickle.PickleError, EOFError, Exception) as e:
+            print(f"Deserialization failed: {e}")
+            return None
