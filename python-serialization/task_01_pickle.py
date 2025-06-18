@@ -23,4 +23,3 @@ class CustomObject:
                 return pickle.load(f)
         except:
             return None
-
