@@ -1,11 +1,10 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-
 class SimpleAPIHandler(BaseHTTPRequestHandler):
     def _set_headers(self, content_type="text/plain", status=200):
         self.send_response(status)
-        self.send_header("Content-type", content_type)
+        self.send_header("Content-Type", content_type)
         self.end_headers()
 
     def do_GET(self):
@@ -35,17 +34,17 @@ class SimpleAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(info).encode("utf-8"))
 
         else:
+            # Düzeltilmiş 404 cevabı
             self._set_headers("application/json", status=404)
             error_msg = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error_msg).encode("utf-8"))
-
+            response = json.dumps(error_msg)
+            self.wfile.write(response.encode("utf-8"))
 
 def run(server_class=HTTPServer, handler_class=SimpleAPIHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print(f"Starting server on http://localhost:{port}")
     httpd.serve_forever()
-
 
 if __name__ == "__main__":
     run()
